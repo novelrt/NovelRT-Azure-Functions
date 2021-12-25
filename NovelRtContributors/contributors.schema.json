@@ -1,0 +1,63 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://novelrt.github.io/contributors.schema.json",
+    "title": "NovelRT Contributors",
+    "description": "Represents the NovelRT contributors",
+    "type": "object",
+    "properties": {
+        "functionName": {
+            "description": "The function that was invoked.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
+        },
+        "route": {
+            "description": "The route that was invoked.",
+            "type": "string",
+            "pattern": "((GET)|(POST)|(PATCH)|(PUT)|(DELETE)) /"
+        },
+        "timestamp": {
+            "description": "Date and time when the result was produced.",
+            "type": "string",
+            "format": "datetime"
+        },
+        "data": {
+            "description": "Data array - contributors to NovelRT organisation.",
+            "type": "array",
+            "items": {
+                "description": "Contributor to NovelRT organisation.",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "GitHub ID of the contributor",
+                        "type": "number"
+                    },
+                    "login": {
+                        "description": "GitHub login of the contributor",
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "htmlUrl": {
+                        "description": "URL of the GitHub profile of the contributor",
+                        "type": "string",
+                        "format": "uri"
+                    },
+                    "avatarUrl": {
+                        "description": "URL of the GitHub avatar of the contributor",
+                        "type": "string",
+                        "format": "uri"
+                    },
+                    "contributions": {
+                        "description": "Number of contributions to the NovelRT org by the contributor",
+                        "type": "integer",
+                        "minimum": 1
+                    }
+                }
+            },
+            "minItems": 0,
+            "uniqueItems": true,
+            "required": ["id", "login", "htmlUrl", "contributions"]
+        }
+    },
+    "required": ["functionName", "route", "timestamp", "data"]
+}
